@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>NexoraMC • Server Store</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Inter,Segoe UI,Arial,sans-serif;background:#05020d;color:#fff;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:-25%;z-index:-3;background:radial-gradient(circle at 15% 15%,#6518c744,transparent 25%),radial-gradient(circle at 85% 20%,#b20dff35,transparent 25%),radial-gradient(circle at 50% 85%,#3212a333,transparent 30%);animation:aurora 12s ease-in-out infinite alternate}
+body:after{content:"";position:fixed;inset:0;z-index:-2;background-image:linear-gradient(#ffffff08 1px,transparent 1px),linear-gradient(90deg,#ffffff08 1px,transparent 1px);background-size:55px 55px;mask-image:linear-gradient(to bottom,#000,transparent)}
+@keyframes aurora{to{transform:scale(1.12) rotate(2deg)}}
+a{text-decoration:none;color:inherit}
+.container{width:min(1180px,92%);margin:auto}
+nav{position:sticky;top:0;z-index:20;background:#05020dcc;backdrop-filter:blur(18px);border-bottom:1px solid #9d4dff33}
+.nav{height:72px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:25px;font-weight:1000;letter-spacing:-1px;background:linear-gradient(90deg,#fff,#a73cff);-webkit-background-clip:text;color:transparent}
+.navlinks{display:flex;gap:25px;color:#c8bfd8;font-size:14px}.navlinks a:hover{color:#fff}
+.btn{display:inline-flex;justify-content:center;align-items:center;padding:12px 18px;border-radius:12px;border:1px solid #b54cff55;background:linear-gradient(135deg,#8c22ff,#4b16c8);font-weight:800;box-shadow:0 12px 35px #7d20ff2b;transition:.2s}.btn:hover{transform:translateY(-3px);box-shadow:0 16px 40px #8c22ff55}
+.hero{min-height:690px;display:grid;place-items:center;text-align:center;padding:90px 0 65px;position:relative}
+.badge{display:inline-flex;gap:9px;align-items:center;padding:8px 14px;border:1px solid #b24dff55;background:#8d24ff12;border-radius:999px;color:#d8a8ff;font-size:12px;font-weight:900;letter-spacing:1.5px}
+.dot{width:7px;height:7px;border-radius:50%;background:#50ef91;box-shadow:0 0 15px #50ef91}
+h1{font-size:clamp(58px,10vw,112px);line-height:.88;letter-spacing:-7px;margin:27px 0 24px;background:linear-gradient(100deg,#fff 20%,#d7b5ff 45%,#8d29ff 70%,#f0cfff);-webkit-background-clip:text;color:transparent;text-shadow:0 0 50px #8d22ff55}
+.hero p{max-width:720px;margin:auto;color:#aaa1bc;line-height:1.7;font-size:17px}
+.hero-actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:30px}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin:45px auto 0;max-width:900px}
+.info{padding:20px;border:1px solid #b24dff44;border-radius:17px;background:#0c0717cc;backdrop-filter:blur(15px);text-align:left}
+.info small{display:block;color:#b36bff;font-weight:900;font-size:11px;letter-spacing:1.5px;margin-bottom:7px}.info strong{font-size:16px;word-break:break-word}.discord{color:#c9b1ff}
+section{padding:80px 0}.head{text-align:center;margin-bottom:30px}.eyebrow{color:#b968ff;font-size:12px;font-weight:900;letter-spacing:2px;text-transform:uppercase}.head h2{font-size:42px;letter-spacing:-2px;margin:7px 0}.head p{color:#9289a5}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.card{position:relative;padding:24px;border:1px solid #ffffff12;border-radius:20px;background:linear-gradient(145deg,#130b24e8,#090511e8);box-shadow:0 20px 60px #0005;overflow:hidden;transition:.25s}
+.card:hover{transform:translateY(-7px);border-color:#a640ff77;box-shadow:0 25px 70px #8b22ff20}
+.card:before{content:"";position:absolute;right:-60px;top:-70px;width:150px;height:150px;background:#8d2cff;filter:blur(65px);opacity:.16}
+.rank-icon{font-size:42px;margin-bottom:15px}.card h3{font-size:22px;margin-bottom:8px}.card p{font-size:13px;line-height:1.55;color:#9c94aa;min-height:42px}
+.perks{margin:17px 0;display:grid;gap:8px;color:#cfc7dc;font-size:12px}.perks span:before{content:"✓";color:#b963ff;margin-right:7px}
+.price{font-size:29px;font-weight:950;margin:18px 0;color:#fff}.price em{font-size:12px;color:#8e849b;font-style:normal;font-weight:500}
+.card .btn{width:100%}
+.vip{border-color:#42e16b44}.titan{border-color:#20a9ff44}.xavien{border-color:#b342ff66}.xplus{border-color:#f4bd35aa}
+.crate-icon{font-size:50px;margin-bottom:13px}.crate-price{font-size:27px;font-weight:950;margin:18px 0}
+.crates{grid-template-columns:repeat(4,1fr)}
+.special{border-color:#d44cff66}.special .tag{background:#a832ff}
+.tag{position:absolute;top:15px;right:15px;padding:5px 8px;border-radius:7px;font-size:9px;font-weight:900;background:#8d24ff}
+.trust{margin-top:30px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.trust div{padding:18px;text-align:center;border:1px solid #ffffff10;background:#0b0714cc;border-radius:15px;color:#c6bdd3}.trust b{display:block;color:#fff;margin-top:5px;font-size:13px}
+footer{padding:40px 0;border-top:1px solid #ffffff10;text-align:center;color:#777080}footer strong{color:#c36cff}
+@media(max-width:900px){.grid,.crates{grid-template-columns:repeat(2,1fr)}.trust{grid-template-columns:repeat(2,1fr)}.navlinks{display:none}}
+@media(max-width:600px){.grid,.crates,.info-grid,.trust{grid-template-columns:1fr}h1{letter-spacing:-4px}.hero{min-height:650px;padding-top:70px}.info{text-align:center}.head h2{font-size:34px}}
+</style>
+</head>
+<body>
+<nav><div class="container nav">
+<div class="logo">NEXORA<span>MC</span></div>
+<div class="navlinks"><a href="#home">Home</a><a href="#ranks">Ranks</a><a href="#crates">Crates & Keys</a><a href="#about">About</a></div>
+<a class="btn" href="https://discord.gg/HZzGqpUkp" target="_blank">Join Discord</a>
+</div></nav>
+
+<header class="hero" id="home"><div class="container">
+<div class="badge"><span class="dot"></span> NEXORAMC • SERVER STORE</div>
+<h1>NEXORA<br>MC</h1>
+<p>Welcome to the official NexoraMC Store. Support the server and unlock exclusive ranks, crate keys and premium perks built for the NexoraMC community.</p>
+<div class="hero-actions"><a class="btn" href="#ranks">Explore Ranks</a><a class="btn" href="#crates">View Crates & Keys</a></div>
+<div class="info-grid">
+<div class="info"><small>NEXORAMC IP</small><strong>mauritania-scalability.tun.ply.gg</strong></div>
+<div class="info"><small>DISCORD SERVER</small><strong class="discord">discord.gg/HZzGqpUkp</strong></div>
+</div>
+</div></header>
+
+<section id="about"><div class="container"><div class="head"><div class="eyebrow">Official Store</div><h2>Server Store</h2><p>Choose your rank or grab a crate key and power up your NexoraMC adventure.</p></div></div></section>
+
+<section id="ranks"><div class="container"><div class="head"><div class="eyebrow">Premium Access</div><h2>Ranks</h2><p>Unlock exclusive perks and show your status across NexoraMC.</p></div>
+<div class="grid">
+<div class="card vip"><div class="rank-icon">👑</div><h3>VIP</h3><p>A great premium upgrade for every player.</p><div class="perks"><span>Exclusive Prefix</span><span>/kit vip</span><span>Extra Home</span><span>Access to VIP Area</span></div><div class="price">₹100</div><a class="btn" href="#">Buy VIP</a></div>
+<div class="card titan"><div class="rank-icon">🔱</div><h3>Titan</h3><p>More power, more perks and more freedom.</p><div class="perks"><span>All VIP Perks</span><span>/kit titan</span><span>Extra Homes</span><span>Access to Titan Area</span></div><div class="price">₹500</div><a class="btn" href="#">Buy Titan</a></div>
+<div class="card xavien"><div class="rank-icon">💜</div><h3>Xavien</h3><p>An elite rank for dedicated NexoraMC players.</p><div class="perks"><span>All Titan Perks</span><span>/kit xavien</span><span>More Homes</span><span>Access to Xavien Area</span></div><div class="price">₹900</div><a class="btn" href="#">Buy Xavien</a></div>
+<div class="card xplus"><div class="tag">TOP TIER</div><div class="rank-icon">👑</div><h3>Xavien+</h3><p>The ultimate premium NexoraMC rank.</p><div class="perks"><span>All Xavien Perks</span><span>/kit xavien+</span><span>Maximum Homes</span><span>Exclusive Access</span></div><div class="price">₹999</div><a class="btn" href="#">Buy Xavien+</a></div>
+</div></div></section>
+
+<section id="crates"><div class="container"><div class="head"><div class="eyebrow">Loot & Rewards</div><h2>Crates & Keys</h2><p>Get the key for your favourite crate and unlock exclusive rewards in-game.</p></div>
+<div class="grid crates">
+<div class="card"><div class="crate-icon">💎</div><h3>Prime Crate</h3><p>Unlock premium Prime rewards.</p><div class="crate-price">₹30</div><a class="btn" href="#">Buy Prime Key</a></div>
+<div class="card special"><div class="tag">POPULAR</div><div class="crate-icon">⚡</div><h3>Xavien Crate</h3><p>Unlock powerful Xavien rewards.</p><div class="crate-price">₹50</div><a class="btn" href="#">Buy Xavien Key</a></div>
+<div class="card"><div class="crate-icon">🎉</div><h3>Party Crate</h3><p>Unlock fun Party rewards and surprises.</p><div class="crate-price">₹40</div><a class="btn" href="#">Buy Party Key</a></div>
+<div class="card special"><div class="crate-icon">🔑</div><h3>Keyall Key</h3><p>Special key for Keyall rewards and events.</p><div class="crate-price">Coming Soon</div><a class="btn" href="#">Notify Me</a></div>
+</div></div></section>
+
+<section><div class="container"><div class="trust">
+<div>🛡️<b>Secure Payments</b></div><div>⚡<b>Fast Delivery</b></div><div>💜<b>Community Support</b></div><div>⛏️<b>Made For Players</b></div>
+</div></div></section>
+
+<footer><div class="container"><strong>NEXORAMC</strong><br>© 2026 NexoraMC. All rights reserved.<br><small>Thanks for supporting the NexoraMC community.</small></div></footer>
+</body>
+</html>
